@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddQtyColumnToCardsTable extends Migration
+class AddUserIdToCardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddQtyColumnToCardsTable extends Migration
     public function up()
     {
         Schema::table('cards', function (Blueprint $table) {
-            $table->integer('quantity_owned')->default(1)->after('gatherer_image_url');
+            $table->foreignId('user_id')->nullable()->constrained('users');
         });
     }
 
@@ -26,7 +26,7 @@ class AddQtyColumnToCardsTable extends Migration
     public function down()
     {
         Schema::table('cards', function (Blueprint $table) {
-            $table->dropColumn('quantity_owned');
+            $table->dropColumn('user_id');
         });
     }
 }

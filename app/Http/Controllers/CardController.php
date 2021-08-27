@@ -6,6 +6,7 @@ use App\Models\Card;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class CardController extends Controller
 {
@@ -16,7 +17,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        $cards = Card::get();
+        $cards = Card::get()->where('user_id', Auth::id());
 
         return view('cards', ['cards' => $cards]);
     }
@@ -176,7 +177,7 @@ class CardController extends Controller
             'flavor' => $request->flavor,
             'multiverseid' => $request->multiverseid,
             'gatherer_image_url' => $request->imageUrl,
-            
+            'user_id' => $request->user()['id'],
         ]);
         // dd($card);
         $card->save();

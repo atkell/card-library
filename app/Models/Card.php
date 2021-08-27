@@ -28,6 +28,7 @@ class Card extends Model
         'toughness',
         'layout',
         'multiverseid',
-        'gatherer_image_url'
+        'gatherer_image_url',
+        'user_id'
     ];
 }
