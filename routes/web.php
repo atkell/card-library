@@ -25,17 +25,13 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/cards', [CardController::class, 'index']);
-Route::get('/cards/detail/{id}', [CardController::class, 'show']);
+Route::get('/cards', [CardController::class, 'index'])->middleware(['auth']);
+Route::get('/cards/detail/{id}', [CardController::class, 'show'])->middleware(['auth']);;
 Route::get('/cards/lookup', function() {
     return view('lookup_card');
-});
+})->middleware(['auth']);;
 // Route::get('/cards/lookup/{id}', [CardController::class, 'create']);
-Route::post('/cards/lookup', [CardController::class, 'create']);
+Route::post('/cards/lookup', [CardController::class, 'create'])->middleware(['auth']);;
 // Route::get('/cards/lookup/{name}', [CardController::class, 'create']);
-Route::post('/cards', [CardController::class, 'store']);
-Route::get('/cards/destroy', [CardController::class, 'destroy']);
+Route::post('/cards', [CardController::class, 'store'])->middleware(['auth']);;
+Route::get('/cards/destroy', [CardController::class, 'destroy'])->middleware(['auth']);;
